@@ -1,5 +1,5 @@
 import field, player
-
+from bomb import MadBomb
 
 class Game():
     """
@@ -25,6 +25,9 @@ class Game():
         while True:
             try:
                 coordinates =  self._players[index].read_position(message)
+                if coordinates == "bomb":
+                    bomb = MadBomb(0)
+                    coordinates = bomb.detonate()
                 if coordinates not in self._fields[next_index].shoots and\
                         coordinates[0]  in range(10):
                     return coordinates
